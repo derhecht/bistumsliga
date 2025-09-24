@@ -4,7 +4,7 @@ namespace Bistumsliga\Bistumsliga\DataProcessor;
 
 use Bistumsliga\Bistumsliga\Domain\Model\Competition;
 use Bistumsliga\Bistumsliga\Domain\Model\CompetitionPenalty;
-use Bistumsliga\Bistumsliga\Domain\Model\Match;
+use Bistumsliga\Bistumsliga\Domain\Model\Game;
 use Bistumsliga\Bistumsliga\Domain\Model\Team;
 use Bistumsliga\Bistumsliga\Domain\Repository\CompetitionPenaltyRepository;
 use Bistumsliga\Bistumsliga\Domain\Repository\CompetitionRepository;
@@ -47,7 +47,7 @@ class MatchReportDataProcessor extends \In2code\Powermail\DataProcessor\Abstract
      */
     protected $profileRepository;
 
-    public __construct(CompetitionRepository $competitionRepository, TeamRepository $teamRepository, CompetitionPenaltyRepository $competitionPenaltyRepository, MatchRepository $matchRepository, ProfileRepository $profileRepository, PersistenceManager $persistenceManager)
+    public function __construct(CompetitionRepository $competitionRepository, TeamRepository $teamRepository, CompetitionPenaltyRepository $competitionPenaltyRepository, MatchRepository $matchRepository, ProfileRepository $profileRepository, PersistenceManager $persistenceManager)
     {
         $this->competitionRepository = $competitionRepository;
         $this->teamRepository = $teamRepository;
@@ -85,7 +85,7 @@ class MatchReportDataProcessor extends \In2code\Powermail\DataProcessor\Abstract
         $guestTeam = $this->teamRepository->findOneByName($guest);
 
         /**
-         * @var Match $match
+         * @var Game $match
          */
         $match = $this->matchRepository->findOneByCompetitionRoundHomeGuest($competitionObject, $round, $homeTeam, $guestTeam);
 

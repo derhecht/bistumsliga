@@ -2,7 +2,7 @@
 
 namespace Bistumsliga\Bistumsliga\Domain\Model;
 
-class Match extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
+class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
 {
     /**
      * @var int

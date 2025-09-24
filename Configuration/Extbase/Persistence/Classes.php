@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 
 return [
-    \Bistumsliga\Bistumsliga\Domain\Model\Match::class => [
+    \Bistumsliga\Bistumsliga\Domain\Model\Game::class => [
         'tableName' => 'tx_cfcleague_games'
     ],
     \Bistumsliga\Bistumsliga\Domain\Model\CompetitionPenalty::class => [

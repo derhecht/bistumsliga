@@ -89,23 +89,23 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     }
 
     /**
-     * @return Match
+     * @return Game
      */
-    public function getGame(): Match
+    public function getGame(): Game
     {
         return $this->game;
     }
 
     /**
-     * @param Match $game
+     * @param Game $game
      */
-    public function setGame(Match $game): void
+    public function setGame(Game $game): void
     {
         $this->game = $game;
     }
 
     /**
-     * @var Match
+     * @var Game
      */
     protected $game;
 }
