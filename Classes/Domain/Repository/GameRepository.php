@@ -6,7 +6,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
-class MatchRepository extends AbstractRepository
+class GameRepository extends AbstractRepository
 {
 
     public function findOneByCompetitionRoundHomeGuest($competition, $round, $home, $guest)

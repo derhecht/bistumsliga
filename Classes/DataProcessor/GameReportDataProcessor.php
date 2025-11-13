@@ -8,14 +8,14 @@ use Bistumsliga\Bistumsliga\Domain\Model\Game;
 use Bistumsliga\Bistumsliga\Domain\Model\Team;
 use Bistumsliga\Bistumsliga\Domain\Repository\CompetitionPenaltyRepository;
 use Bistumsliga\Bistumsliga\Domain\Repository\CompetitionRepository;
-use Bistumsliga\Bistumsliga\Domain\Repository\MatchRepository;
+use Bistumsliga\Bistumsliga\Domain\Repository\GameRepository;
 use Bistumsliga\Bistumsliga\Domain\Repository\ProfileRepository;
 use Bistumsliga\Bistumsliga\Domain\Repository\TeamRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
-class MatchReportDataProcessor extends \In2code\Powermail\DataProcessor\AbstractDataProcessor
+class GameReportDataProcessor extends \In2code\Powermail\DataProcessor\AbstractDataProcessor
 {
     /**
      * @var PersistenceManager
@@ -38,26 +38,26 @@ class MatchReportDataProcessor extends \In2code\Powermail\DataProcessor\Abstract
     protected $teamRepository;
 
     /**
-     * @var MatchRepository
+     * @var GameRepository
      */
-    protected $matchRepository;
+    protected $gameRepository;
 
     /**
      * @var ProfileRepository
      */
     protected $profileRepository;
 
-    public function __construct(CompetitionRepository $competitionRepository, TeamRepository $teamRepository, CompetitionPenaltyRepository $competitionPenaltyRepository, MatchRepository $matchRepository, ProfileRepository $profileRepository, PersistenceManager $persistenceManager)
+    public function __construct(CompetitionRepository $competitionRepository, TeamRepository $teamRepository, CompetitionPenaltyRepository $competitionPenaltyRepository, GameRepository $gameRepository, ProfileRepository $profileRepository, PersistenceManager $persistenceManager)
     {
         $this->competitionRepository = $competitionRepository;
         $this->teamRepository = $teamRepository;
         $this->competitionPenaltyRepository = $competitionPenaltyRepository;
-        $this->matchRepository = $matchRepository;
+        $this->gameRepository = $gameRepository;
         $this->profileRepository = $profileRepository;
         $this->persistenceManager = $persistenceManager;
     }
 
-    public function matchReportDataProcessor(): void
+    public function gameReportDataProcessor(): void
     {
         $answers = $this->getMail()->getAnswersByFieldMarker();
         if (!isset($answers['liga'])) {
@@ -91,49 +91,49 @@ class MatchReportDataProcessor extends \In2code\Powermail\DataProcessor\Abstract
         $guestTeam = $this->teamRepository->findOneByName($guest);
 
         /**
-         * @var Game $match
+         * @var Game $game
          */
-        $match = $this->matchRepository->findOneByCompetitionRoundHomeGuest($competitionObject, $round, $homeTeam, $guestTeam);
+        $game = $this->gameRepository->findOneByCompetitionRoundHomeGuest($competitionObject, $round, $homeTeam, $guestTeam);
 
-        if (empty($match)) {
+        if (empty($game)) {
             return;
         }
 
-        if (!empty($match->getGoalsHome1())) {
-            //match already processed - only add additional comment if present
+        if (!empty($game->getGoalsHome1())) {
+            //game already processed - only add additional comment if present
             if (!empty($report)) {
-                $existingReport = (string)$match->getGameReport();
-                $existingAuthor = (string)$match->getGameReportAuthor();
-                $match->setGameReport($existingReport . PHP_EOL . PHP_EOL . $report . PHP_EOL . " von " . $author . ", " . $authorTeam);
-                $match->setGameReportAuthor($existingAuthor ? ($existingAuthor . ", " . $author) : $author);
-                $this->matchRepository->update($match);
+                $existingReport = (string)$game->getGameReport();
+                $existingAuthor = (string)$game->getGameReportAuthor();
+                $game->setGameReport($existingReport . PHP_EOL . PHP_EOL . $report . PHP_EOL . " von " . $author . ", " . $authorTeam);
+                $game->setGameReportAuthor($existingAuthor ? ($existingAuthor . ", " . $author) : $author);
+                $this->gameRepository->update($game);
                 $this->persistenceManager->persistAll();
             }
 
             return;
         }
 
-        $match->setGoalsHome1(intval($halfHome, 10));
-        $match->setGoalsHome2(intval($finalHome, 10));
-        $match->setGoalsGuest1(intval($halfGuest, 10));
-        $match->setGoalsGuest2(intval($finalGuest, 10));
+        $game->setGoalsHome1(intval($halfHome, 10));
+        $game->setGoalsHome2(intval($finalHome, 10));
+        $game->setGoalsGuest1(intval($halfGuest, 10));
+        $game->setGoalsGuest2(intval($finalGuest, 10));
 
         if (!empty($assessment)) {
-            $match->setAddinfo("Wertung");
+            $game->setAddinfo("Wertung");
         }
 
         if (!empty($report)) {
-            $match->setGameReport($report . PHP_EOL . " von " . $author . ", " . $authorTeam);
-            $match->setGameReportAuthor($author);
+            $game->setGameReport($report . PHP_EOL . " von " . $author . ", " . $authorTeam);
+            $game->setGameReportAuthor($author);
         }
 
         //set finished
-        $match->setStatus(2);
+        $game->setStatus(2);
 
-        $this->matchRepository->update($match);
+        $this->gameRepository->update($game);
 
         if ($referee === "Nicht anwesend") {
-            $refereeProfile = $match->getReferee();
+            $refereeProfile = $game->getReferee();
             $refereeLastName = $refereeProfile ? $refereeProfile->getLastName() : null;
             if ($refereeLastName) {
                 /**
@@ -145,7 +145,7 @@ class MatchReportDataProcessor extends \In2code\Powermail\DataProcessor\Abstract
                     $penalty = new CompetitionPenalty();
                     $penalty->setTeam($teamToPenalty);
                     $penalty->setCompetition($competitionObject);
-                    $penalty->setGame($match);
+                    $penalty->setGame($game);
                     $penalty->setPointsPos(1);
                     $penalty->setComment("-1 Punkt, " . $authorTeam . " meldete: " . $teamToPenalty->getName() . " hat den Schiedsrichter nicht gestellt, " . $round);
                     $penalty->setPid($competitionObject->getPid());
