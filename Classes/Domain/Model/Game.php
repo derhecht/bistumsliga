@@ -15,9 +15,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $goalsHome2;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getGoalsHome2(): int
+    public function getGoalsHome2(): ?int
     {
         return $this->goalsHome2;
     }
@@ -31,9 +31,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getGoalsGuest1(): int
+    public function getGoalsGuest1(): ?int
     {
         return $this->goalsGuest1;
     }
@@ -47,9 +47,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getGoalsGuest2(): int
+    public function getGoalsGuest2(): ?int
     {
         return $this->goalsGuest2;
     }
@@ -63,9 +63,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getGameReport(): string
+    public function getGameReport(): ?string
     {
         return $this->gameReport;
     }
@@ -79,9 +79,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getGameReportAuthor(): string
+    public function getGameReportAuthor(): ?string
     {
         return $this->gameReportAuthor;
     }
@@ -92,9 +92,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $addinfo;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAddinfo(): string
+    public function getAddinfo(): ?string
     {
         return $this->addinfo;
     }
@@ -113,9 +113,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $status;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getStatus(): int
+    public function getStatus(): ?int
     {
         return $this->status;
     }
@@ -157,9 +157,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $gameReportAuthor;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getGoalsHome1(): int
+    public function getGoalsHome1(): ?int
     {
         return $this->goalsHome1;
     }
@@ -178,9 +178,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $referee;
 
     /**
-     * @return Profile
+     * @return Profile|null
      */
-    public function getReferee(): Profile
+    public function getReferee(): ?Profile
     {
         return $this->referee;
     }

@@ -10,9 +10,9 @@ class Profile extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $lastName;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName(): string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }

@@ -10,9 +10,9 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     protected $pointsPos;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPointsPos(): int
+    public function getPointsPos(): ?int
     {
         return $this->pointsPos;
     }
@@ -26,9 +26,9 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getComment(): string
+    public function getComment(): ?string
     {
         return $this->comment;
     }
@@ -57,9 +57,9 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     protected $competition;
 
     /**
-     * @return Team
+     * @return Team|null
      */
-    public function getTeam(): Team
+    public function getTeam(): ?Team
     {
         return $this->team;
     }
@@ -73,9 +73,9 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     }
 
     /**
-     * @return Competition
+     * @return Competition|null
      */
-    public function getCompetition(): Competition
+    public function getCompetition(): ?Competition
     {
         return $this->competition;
     }
@@ -89,9 +89,9 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     }
 
     /**
-     * @return Game
+     * @return Game|null
      */
-    public function getGame(): Game
+    public function getGame(): ?Game
     {
         return $this->game;
     }

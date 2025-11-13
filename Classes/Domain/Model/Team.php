@@ -10,9 +10,9 @@ class Team extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $name;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
