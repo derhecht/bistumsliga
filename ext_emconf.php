@@ -12,6 +12,7 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'typo3' => '12.4.0-12.4.99',
+            'cfc_league' => '>= 1.7.1'
         ],
         'conflicts' => [],
         'suggests' => [],
