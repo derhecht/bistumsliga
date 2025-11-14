@@ -1,41 +1,32 @@
 {
-  "name": "bistumsliga/bistumsliga",
-  "type": "typo3-cms-extension",
-  "description": "Customization extension for bistumsliga.de",
-  "version": "1.0.2",
-  "authors": [
-    {
-      "name": "Jakob Berlin",
-      "role": "Developer"
+    "name": "derhecht/bistumsliga",
+    "description": "Customization extension for bistumsliga.de.",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Jakob Berlin",
+            "email": "jakob@ybals.de"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^12.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Derhecht\\Bistumsliga\\": "Classes/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "bistumsliga"
+        }
     }
-  ],
-  "license": "GPL-2.0-or-later",
-  "require": {
-    "typo3/cms-core": "^12.4",
-    "digedag/cfc-league": "^1.7.1"
-  },
-  "autoload": {
-    "psr-4": {
-      "Bistumsliga\\Bistumsliga\\": "Classes"
-    }
-  },
-  "replace": {
-    "typo3-ter/bistumsliga": "self.version"
-  },
-  "config": {
-    "vendor-dir": ".Build/vendor",
-    "bin-dir": ".Build/bin"
-  },
-  "scripts": {
-    "post-autoload-dump": [
-      "TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
-    ]
-  },
-  "extra": {
-    "typo3/cms": {
-      "cms-package-dir": "{$vendor-dir}/typo3/cms",
-      "web-dir": ".Build/public",
-      "extension-key": "bistumsliga"
-    }
-  }
 }
