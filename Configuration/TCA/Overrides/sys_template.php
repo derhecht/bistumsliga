@@ -1,4 +1,8 @@
 <?php
-defined('TYPO3_MODE') || die();
+defined('TYPO3') || die('Access denied.');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('bistumsliga', 'Configuration/TypoScript', 'bistumsliga');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    'bistumsliga',
+    'Configuration/TypoScript',
+    'bistumsliga'
+);
