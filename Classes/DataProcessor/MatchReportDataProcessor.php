@@ -4,7 +4,7 @@ namespace Bistumsliga\Bistumsliga\DataProcessor;
 
 use Bistumsliga\Bistumsliga\Domain\Model\Competition;
 use Bistumsliga\Bistumsliga\Domain\Model\CompetitionPenalty;
-use Bistumsliga\Bistumsliga\Domain\Model\Game;
+use Bistumsliga\Bistumsliga\Domain\Model\Match;
 use Bistumsliga\Bistumsliga\Domain\Model\Team;
 use Bistumsliga\Bistumsliga\Domain\Repository\CompetitionPenaltyRepository;
 use Bistumsliga\Bistumsliga\Domain\Repository\CompetitionRepository;
@@ -47,41 +47,39 @@ class MatchReportDataProcessor extends \In2code\Powermail\DataProcessor\Abstract
      */
     protected $profileRepository;
 
-    public function __construct(CompetitionRepository $competitionRepository, TeamRepository $teamRepository, CompetitionPenaltyRepository $competitionPenaltyRepository, MatchRepository $matchRepository, ProfileRepository $profileRepository, PersistenceManager $persistenceManager)
+    /**
+     * @return void
+     */
+    public function initializeDataProcessor(): void
     {
-        $this->competitionRepository = $competitionRepository;
-        $this->teamRepository = $teamRepository;
-        $this->competitionPenaltyRepository = $competitionPenaltyRepository;
-        $this->matchRepository = $matchRepository;
-        $this->profileRepository = $profileRepository;
-        $this->persistenceManager = $persistenceManager;
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->competitionRepository = $objectManager->get(CompetitionRepository::class);
+        $this->teamRepository = $objectManager->get(TeamRepository::class);
+        $this->competitionPenaltyRepository = $objectManager->get(CompetitionPenaltyRepository::class);
+        $this->matchRepository = $objectManager->get(MatchRepository::class);
+        $this->profileRepository = $objectManager->get(ProfileRepository::class);
+        $this->persistenceManager = $objectManager->get(PersistenceManager::class);
     }
 
     public function matchReportDataProcessor(): void
     {
-        $answers = $this->getMail()->getAnswersByFieldMarker();
-        if (!isset($answers['liga'])) {
+        if (is_null($this->getMail()->getAnswersByFieldMarker()['liga'])) {
             return;
         }
 
-        $get = function (string $key) use ($answers) {
-            $answer = $answers[$key] ?? null;
-            return is_object($answer) && method_exists($answer, 'getValue') ? $answer->getValue() : null;
-        };
-
-        $competition = $get('liga') ?? '';
-        $round = $get('spieltag') ?? '';
-        $home = $get('heimmannschaft') ?? '';
-        $guest = $get('gastmannschaft') ?? '';
-        $finalHome = $get('endstand') ?? '';
-        $finalGuest = $get('endstand_gast') ?? '';
-        $halfHome = $get('halbzeitstand') ?? '';
-        $halfGuest = $get('halbzeitstand_gast') ?? '';
-        $referee = $get('schiedsrichter') ?? '';
-        $report = $get('bemerkungen') ?? '';
-        $author = trim(($get('vorname') ?? '') . ' ' . ($get('nachname') ?? ''));
-        $authorTeam = $get('mannschaft') ?? '';
-        $assessment = $get('wertung') ?? '';
+        $competition = $this->getMail()->getAnswersByFieldMarker()['liga']->getValue();
+        $round = $this->getMail()->getAnswersByFieldMarker()['spieltag']->getValue();
+        $home = $this->getMail()->getAnswersByFieldMarker()['heimmannschaft']->getValue();
+        $guest = $this->getMail()->getAnswersByFieldMarker()['gastmannschaft']->getValue();
+        $finalHome = $this->getMail()->getAnswersByFieldMarker()['endstand']->getValue();
+        $finalGuest = $this->getMail()->getAnswersByFieldMarker()['endstand_gast']->getValue();
+        $halfHome = $this->getMail()->getAnswersByFieldMarker()['halbzeitstand']->getValue();
+        $halfGuest = $this->getMail()->getAnswersByFieldMarker()['halbzeitstand_gast']->getValue();
+        $referee = $this->getMail()->getAnswersByFieldMarker()['schiedsrichter']->getValue();
+        $report = $this->getMail()->getAnswersByFieldMarker()['bemerkungen']->getValue();
+        $author = $this->getMail()->getAnswersByFieldMarker()['vorname']->getValue() . " " . $this->getMail()->getAnswersByFieldMarker()['nachname']->getValue();
+        $authorTeam = $this->getMail()->getAnswersByFieldMarker()['mannschaft']->getValue();
+        $assessment = $this->getMail()->getAnswersByFieldMarker()['wertung']->getValue();
 
         /**
          * @var Competition $competitionObject
@@ -91,7 +89,7 @@ class MatchReportDataProcessor extends \In2code\Powermail\DataProcessor\Abstract
         $guestTeam = $this->teamRepository->findOneByName($guest);
 
         /**
-         * @var Game $match
+         * @var Match $match
          */
         $match = $this->matchRepository->findOneByCompetitionRoundHomeGuest($competitionObject, $round, $homeTeam, $guestTeam);
 
@@ -102,10 +100,8 @@ class MatchReportDataProcessor extends \In2code\Powermail\DataProcessor\Abstract
         if (!empty($match->getGoalsHome1())) {
             //match already processed - only add additional comment if present
             if (!empty($report)) {
-                $existingReport = (string)$match->getGameReport();
-                $existingAuthor = (string)$match->getGameReportAuthor();
-                $match->setGameReport($existingReport . PHP_EOL . PHP_EOL . $report . PHP_EOL . " von " . $author . ", " . $authorTeam);
-                $match->setGameReportAuthor($existingAuthor ? ($existingAuthor . ", " . $author) : $author);
+                $match->setGameReport($match->getGameReport() . PHP_EOL . PHP_EOL . $report . PHP_EOL . " von " . $author . ", " . $authorTeam);
+                $match->setGameReportAuthor($match->getGameReportAuthor() . ", " . $author);
                 $this->matchRepository->update($match);
                 $this->persistenceManager->persistAll();
             }
@@ -133,25 +129,22 @@ class MatchReportDataProcessor extends \In2code\Powermail\DataProcessor\Abstract
         $this->matchRepository->update($match);
 
         if ($referee === "Nicht anwesend") {
-            $refereeProfile = $match->getReferee();
-            $refereeLastName = $refereeProfile ? $refereeProfile->getLastName() : null;
-            if ($refereeLastName) {
-                /**
-                 * @var Team $teamToPenalty
-                 */
-                $teamToPenalty = $this->teamRepository->findOneByName($refereeLastName);
 
-                if (!empty($teamToPenalty)) {
-                    $penalty = new CompetitionPenalty();
-                    $penalty->setTeam($teamToPenalty);
-                    $penalty->setCompetition($competitionObject);
-                    $penalty->setGame($match);
-                    $penalty->setPointsPos(1);
-                    $penalty->setComment("-1 Punkt, " . $authorTeam . " meldete: " . $teamToPenalty->getName() . " hat den Schiedsrichter nicht gestellt, " . $round);
-                    $penalty->setPid($competitionObject->getPid());
+            /**
+             * @var Team $teamToPenalty
+             */
+            $teamToPenalty = $this->teamRepository->findOneByName($match->getReferee()->getLastName());
 
-                    $this->competitionPenaltyRepository->add($penalty);
-                }
+            if (!empty($teamToPenalty)) {
+                $penalty = new CompetitionPenalty();
+                $penalty->setTeam($teamToPenalty);
+                $penalty->setCompetition($competitionObject);
+                $penalty->setGame($match);
+                $penalty->setPointsPos(1);
+                $penalty->setComment("-1 Punkt, " . $authorTeam . " meldete: " . $teamToPenalty->getName() . " hat den Schiedsrichter nicht gestellt, " . $round);
+                $penalty->setPid($competitionObject->getPid());
+
+                $this->competitionPenaltyRepository->add($penalty);
             }
         }
 

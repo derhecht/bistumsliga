@@ -6,14 +6,14 @@
         "emConf": {
             "category": "templates",
             "custom_category": "",
-            "dependsOn": "typo3 => 10.4.0-12.4.99\n",
+            "dependsOn": "typo3 => 10.4.0-10.4.99\n",
             "disableLocalization": false,
             "disableVersioning": false,
             "generateDocumentationTemplate": false,
             "sourceLanguage": "en",
-            "state": "beta",
-            "targetVersion": "10.4.0-12.4.99",
-            "version": "1.0.1"
+            "state": "alpha",
+            "targetVersion": "10.4.0-10.4.99",
+            "version": "1.0.0"
         },
         "extensionKey": "bistumsliga",
         "name": "bistumsliga",

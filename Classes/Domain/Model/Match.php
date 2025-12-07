@@ -2,8 +2,7 @@
 
 namespace Bistumsliga\Bistumsliga\Domain\Model;
 
-#[\AllowDynamicProperties]
-class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
+class Match extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
 {
     /**
      * @var int
@@ -18,9 +17,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     /**
      * @return int
      */
-    public function getGoalsHome2(): ?int
+    public function getGoalsHome2(): int
     {
-        return $this->goalsHome2 ?? null;
+        return $this->goalsHome2;
     }
 
     /**
@@ -34,9 +33,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     /**
      * @return int
      */
-    public function getGoalsGuest1(): ?int
+    public function getGoalsGuest1(): int
     {
-        return $this->goalsGuest1 ?? null;
+        return $this->goalsGuest1;
     }
 
     /**
@@ -50,9 +49,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     /**
      * @return int
      */
-    public function getGoalsGuest2(): ?int
+    public function getGoalsGuest2(): int
     {
-        return $this->goalsGuest2 ?? null;
+        return $this->goalsGuest2;
     }
 
     /**
@@ -66,9 +65,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     /**
      * @return string
      */
-    public function getGameReport(): ?string
+    public function getGameReport(): string
     {
-        return $this->gameReport ?? null;
+        return $this->gameReport;
     }
 
     /**
@@ -84,7 +83,7 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
      */
     public function getGameReportAuthor(): string
     {
-        return $this->gameReportAuthor ?? '';
+        return $this->gameReportAuthor;
     }
 
     /**
@@ -97,7 +96,7 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
      */
     public function getAddinfo(): string
     {
-        return $this->addinfo ?? '';
+        return $this->addinfo;
     }
 
     /**
@@ -116,9 +115,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     /**
      * @return int
      */
-    public function getStatus(): ?int
+    public function getStatus(): int
     {
-        return $this->status ?? null;
+        return $this->status;
     }
 
     /**
@@ -160,9 +159,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     /**
      * @return int
      */
-    public function getGoalsHome1(): ?int
+    public function getGoalsHome1(): int
     {
-        return $this->goalsHome1 ?? null;
+        return $this->goalsHome1;
     }
 
     /**
@@ -181,9 +180,9 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     /**
      * @return Profile
      */
-    public function getReferee(): ?Profile
+    public function getReferee(): Profile
     {
-        return $this->referee ?? null;
+        return $this->referee;
     }
 
     /**

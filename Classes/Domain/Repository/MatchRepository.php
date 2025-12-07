@@ -2,7 +2,7 @@
 
 namespace Bistumsliga\Bistumsliga\Domain\Repository;
 
-use Bistumsliga\Bistumsliga\Domain\Model\Game;
+use Bistumsliga\Bistumsliga\Domain\Model\Match;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;

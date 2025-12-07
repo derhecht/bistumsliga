@@ -2,7 +2,6 @@
 
 namespace Bistumsliga\Bistumsliga\Domain\Model;
 
-#[\AllowDynamicProperties]
 class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
 {
     /**
@@ -11,11 +10,11 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     protected $pointsPos;
 
     /**
-     * @return int|null
+     * @return int
      */
-    public function getPointsPos(): ?int
+    public function getPointsPos(): int
     {
-        return $this->pointsPos ?? null;
+        return $this->pointsPos;
     }
 
     /**
@@ -27,11 +26,11 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getComment(): ?string
+    public function getComment(): string
     {
-        return $this->comment ?? '';
+        return $this->comment;
     }
 
     /**
@@ -58,11 +57,11 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     protected $competition;
 
     /**
-     * @return Team|null
+     * @return Team
      */
-    public function getTeam(): ?Team
+    public function getTeam(): Team
     {
-        return $this->team ?? null;
+        return $this->team;
     }
 
     /**
@@ -74,11 +73,11 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     }
 
     /**
-     * @return Competition|null
+     * @return Competition
      */
-    public function getCompetition(): ?Competition
+    public function getCompetition(): Competition
     {
-        return $this->competition ?? null;
+        return $this->competition;
     }
 
     /**
@@ -90,23 +89,23 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
     }
 
     /**
-     * @return Game|null
+     * @return Match
      */
-    public function getGame(): ?Game
+    public function getGame(): Match
     {
-        return $this->game ?? null;
+        return $this->game;
     }
 
     /**
-     * @param Game $game
+     * @param Match $game
      */
-    public function setGame(Game $game): void
+    public function setGame(Match $game): void
     {
         $this->game = $game;
     }
 
     /**
-     * @var Game
+     * @var Match
      */
     protected $game;
 }

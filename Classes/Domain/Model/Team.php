@@ -2,7 +2,6 @@
 
 namespace Bistumsliga\Bistumsliga\Domain\Model;
 
-#[\AllowDynamicProperties]
 class Team extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
 {
     /**
@@ -11,9 +10,9 @@ class Team extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $name;
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

@@ -2,7 +2,6 @@
 
 namespace Bistumsliga\Bistumsliga\Domain\Model;
 
-#[\AllowDynamicProperties]
 class Profile extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
 {
     /**
@@ -11,11 +10,11 @@ class Profile extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $lastName;
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getLastName(): ?string
+    public function getLastName(): string
     {
-        return $this->lastName ?? '';
+        return $this->lastName;
     }
 
     /**

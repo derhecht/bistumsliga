@@ -159,11 +159,11 @@ class tx_cfcleaguefe_util_MatchMarker extends tx_rnbase_util_SimpleMarker
         if (0 == strlen(trim($template))) {
             return '';
         }
-
         $sets = $item->getSets();
         $listBuilder = tx_rnbase::makeInstance('tx_rnbase_util_ListBuilder');
+        $out = $listBuilder->render($sets, false, $template, 'tx_rnbase_util_SimpleMarker', $confId, $markerPrefix, $formatter, $options);
 
-        return $listBuilder->render($sets, false, $template, 'tx_rnbase_util_SimpleMarker', $confId, $markerPrefix, $formatter, []);
+        return $out;
     }
 
     /**

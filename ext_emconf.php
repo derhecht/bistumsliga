@@ -16,12 +16,12 @@ $EM_CONF[$_EXTKEY] = [
     'category' => 'templates',
     'author' => 'Jakob Berlin',
     'author_email' => 'jakob@ybals.de',
-    'state' => 'beta',
+    'state' => 'alpha',
     'clearCacheOnLoad' => 0,
-    'version' => '1.0.2',
+    'version' => '1.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-12.4.99',
+            'typo3' => '10.4.0-10.4.99',
             'cfc_league' => '>= 1.7.1'
         ],
         'conflicts' => [],
