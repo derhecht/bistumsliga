@@ -1,0 +1,5 @@
+plugin.tx_bistumsliga {
+  settings {
+    FrontendCss = EXT:bistumsliga/Resources/Public/Css/Frontend.css
+  }
+}
