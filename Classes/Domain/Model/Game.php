@@ -2,6 +2,7 @@
 
 namespace Bistumsliga\Bistumsliga\Domain\Model;
 
+#[\AllowDynamicProperties]
 class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
 {
     /**
@@ -15,11 +16,11 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $goalsHome2;
 
     /**
-     * @return int|null
+     * @return int
      */
     public function getGoalsHome2(): ?int
     {
-        return $this->goalsHome2;
+        return $this->goalsHome2 ?? null;
     }
 
     /**
@@ -31,11 +32,11 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     }
 
     /**
-     * @return int|null
+     * @return int
      */
     public function getGoalsGuest1(): ?int
     {
-        return $this->goalsGuest1;
+        return $this->goalsGuest1 ?? null;
     }
 
     /**
@@ -47,11 +48,11 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     }
 
     /**
-     * @return int|null
+     * @return int
      */
     public function getGoalsGuest2(): ?int
     {
-        return $this->goalsGuest2;
+        return $this->goalsGuest2 ?? null;
     }
 
     /**
@@ -63,11 +64,11 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     }
 
     /**
-     * @return string|null
+     * @return string
      */
     public function getGameReport(): ?string
     {
-        return $this->gameReport;
+        return $this->gameReport ?? null;
     }
 
     /**
@@ -79,11 +80,11 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getGameReportAuthor(): ?string
+    public function getGameReportAuthor(): string
     {
-        return $this->gameReportAuthor;
+        return $this->gameReportAuthor ?? '';
     }
 
     /**
@@ -92,11 +93,11 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $addinfo;
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getAddinfo(): ?string
+    public function getAddinfo(): string
     {
-        return $this->addinfo;
+        return $this->addinfo ?? '';
     }
 
     /**
@@ -113,11 +114,11 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $status;
 
     /**
-     * @return int|null
+     * @return int
      */
     public function getStatus(): ?int
     {
-        return $this->status;
+        return $this->status ?? null;
     }
 
     /**
@@ -157,11 +158,11 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $gameReportAuthor;
 
     /**
-     * @return int|null
+     * @return int
      */
     public function getGoalsHome1(): ?int
     {
-        return $this->goalsHome1;
+        return $this->goalsHome1 ?? null;
     }
 
     /**
@@ -178,11 +179,11 @@ class Game extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
     protected $referee;
 
     /**
-     * @return Profile|null
+     * @return Profile
      */
     public function getReferee(): ?Profile
     {
-        return $this->referee;
+        return $this->referee ?? null;
     }
 
     /**

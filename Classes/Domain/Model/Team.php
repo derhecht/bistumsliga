@@ -2,6 +2,7 @@
 
 namespace Bistumsliga\Bistumsliga\Domain\Model;
 
+#[\AllowDynamicProperties]
 class Team extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
 {
     /**

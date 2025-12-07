@@ -2,6 +2,7 @@
 
 namespace Bistumsliga\Bistumsliga\Domain\Model;
 
+#[\AllowDynamicProperties]
 class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
 {
     /**
@@ -14,7 +15,7 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
      */
     public function getPointsPos(): ?int
     {
-        return $this->pointsPos;
+        return $this->pointsPos ?? null;
     }
 
     /**
@@ -30,7 +31,7 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
      */
     public function getComment(): ?string
     {
-        return $this->comment;
+        return $this->comment ?? '';
     }
 
     /**
@@ -61,7 +62,7 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
      */
     public function getTeam(): ?Team
     {
-        return $this->team;
+        return $this->team ?? null;
     }
 
     /**
@@ -77,7 +78,7 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
      */
     public function getCompetition(): ?Competition
     {
-        return $this->competition;
+        return $this->competition ?? null;
     }
 
     /**
@@ -93,7 +94,7 @@ class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainO
      */
     public function getGame(): ?Game
     {
-        return $this->game;
+        return $this->game ?? null;
     }
 
     /**
