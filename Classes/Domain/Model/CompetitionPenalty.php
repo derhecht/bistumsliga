@@ -1,8 +1,17 @@
 <?php
 
-namespace Bistumsliga\Bistumsliga\Domain\Model;
+declare(strict_types=1);
 
-class CompetitionPenalty extends \TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject
+/*
+ * This file is part of the package derhecht/bistumsliga.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+namespace Derhecht\Bistumsliga\Domain\Model;
+
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+final class CompetitionPenalty extends AbstractEntity
 {
     /**
      * @var int

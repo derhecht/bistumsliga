@@ -2,10 +2,10 @@
 
 namespace Bistumsliga\Bistumsliga\DataProcessor;
 
-use Bistumsliga\Bistumsliga\Domain\Model\Competition;
-use Bistumsliga\Bistumsliga\Domain\Model\CompetitionPenalty;
-use Bistumsliga\Bistumsliga\Domain\Model\Game;
-use Bistumsliga\Bistumsliga\Domain\Model\Team;
+use Derhecht\Bistumsliga\Domain\Model\Competition;
+use Derhecht\Bistumsliga\Domain\Model\CompetitionPenalty;
+use Derhecht\Bistumsliga\Domain\Model\Game;
+use Derhecht\Bistumsliga\Domain\Model\Team;
 use Bistumsliga\Bistumsliga\Domain\Repository\CompetitionPenaltyRepository;
 use Bistumsliga\Bistumsliga\Domain\Repository\CompetitionRepository;
 use Bistumsliga\Bistumsliga\Domain\Repository\MatchRepository;
