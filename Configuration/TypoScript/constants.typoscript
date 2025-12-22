@@ -8,3 +8,4 @@ plugin.tx_cfcleaguefe_report.matchreportTemplate = EXT:bistumsliga/Resources/Pri
 plugin.tx_cfcleaguefe_competition.teamlistTemplate = EXT:bistumsliga/Resources/Private/Templates/Html/teamlist.html
 plugin.tx_cfcleaguefe_competition.matchtableTemplate = EXT:bistumsliga/Resources/Private/Templates/Html/matchtable.html
 plugin.tx_cfcleaguefe_report.stadiumviewTemplate = EXT:bistumsliga/Resources/Private/Templates/Html/stadiums.html
+plugin.tx_cfcleaguefe_competition.stadiumlistTemplate = EXT:bistumsliga/Resources/Private/Templates/Html/stadiums.html
