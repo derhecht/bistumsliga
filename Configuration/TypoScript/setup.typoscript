@@ -4,11 +4,11 @@ lib.t3sports.match.date.H0000.strftime = %d.%m.%y
 
 plugin.tx_powermail.settings.misc.htmlForHtmlFields = 1
 
-#plugin.tx_powermail.settings.setup.dataProcessors {
-#  30 {
-#    class = Bistumsliga\Bistumsliga\DataProcessor\MatchReportDataProcessor
-#  }
-#}
+plugin.tx_powermail.settings.setup.dataProcessors {
+  30 {
+    class = Derhecht\Bistumsliga\DataProcessor\GameReportDataProcessor
+  }
+}
 
 lib.competitionOptions = CONTENT
 lib.competitionOptions {
