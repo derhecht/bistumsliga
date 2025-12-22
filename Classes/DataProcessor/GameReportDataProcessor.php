@@ -11,48 +11,41 @@ use Derhecht\Bistumsliga\Domain\Repository\CompetitionRepository;
 use Derhecht\Bistumsliga\Domain\Repository\GameRepository;
 use Derhecht\Bistumsliga\Domain\Repository\ProfileRepository;
 use Derhecht\Bistumsliga\Domain\Repository\TeamRepository;
+use In2code\Powermail\Domain\Model\Mail;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 class GameReportDataProcessor extends \In2code\Powermail\DataProcessor\AbstractDataProcessor
 {
-    /**
-     * @var PersistenceManager
-     */
-    protected PersistenceManager $persistenceManager;
-
-    /**
-     * @var CompetitionPenaltyRepository
-     */
-    protected CompetitionPenaltyRepository $competitionPenaltyRepository;
-
-    /**
-     * @var CompetitionRepository
-     */
     protected CompetitionRepository $competitionRepository;
-
-    /**
-     * @var TeamRepository
-     */
     protected TeamRepository $teamRepository;
-
-    /**
-     * @var GameRepository
-     */
+    protected CompetitionPenaltyRepository $competitionPenaltyRepository;
     protected GameRepository $gameRepository;
-
-    /**
-     * @var ProfileRepository
-     */
     protected ProfileRepository $profileRepository;
+    protected \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager;
 
-    public function __construct(CompetitionRepository $competitionRepository, TeamRepository $teamRepository, CompetitionPenaltyRepository $competitionPenaltyRepository, GameRepository $gameRepository, ProfileRepository $profileRepository, PersistenceManager $persistenceManager)
-    {
-        $this->competitionRepository = $competitionRepository;
-        $this->teamRepository = $teamRepository;
-        $this->competitionPenaltyRepository = $competitionPenaltyRepository;
-        $this->gameRepository = $gameRepository;
-        $this->profileRepository = $profileRepository;
-        $this->persistenceManager = $persistenceManager;
+    public function __construct(
+        \In2code\Powermail\Domain\Model\Mail $mail,
+        array $configuration,
+        array $settings,
+        string $actionMethodName,
+        \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject,
+        ?CompetitionRepository $competitionRepository = null,
+        ?TeamRepository $teamRepository = null,
+        ?CompetitionPenaltyRepository $competitionPenaltyRepository = null,
+        ?GameRepository $gameRepository = null,
+        ?ProfileRepository $profileRepository = null,
+        ?\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager = null
+    ) {
+        parent::__construct($mail, $configuration, $settings, $actionMethodName, $contentObject);
+        $this->contentObject = $contentObject;
+
+        // Fallback für Powermail Instanziierung
+        $this->competitionRepository = $competitionRepository ?? \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(CompetitionRepository::class);
+        $this->teamRepository = $teamRepository ?? \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TeamRepository::class);
+        $this->competitionPenaltyRepository = $competitionPenaltyRepository ?? \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(CompetitionPenaltyRepository::class);
+        $this->gameRepository = $gameRepository ?? \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(GameRepository::class);
+        $this->profileRepository = $profileRepository ?? \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ProfileRepository::class);
+        $this->persistenceManager = $persistenceManager ?? \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class);
     }
 
     public function process(): void
