@@ -2,7 +2,9 @@
 
 namespace Derhecht\Bistumsliga\Search;
 
+use Sys25\RnBase\Database\Query\Join;
 use System25\T3sports\Search\ProfileSearch;
+use Sys25\RnBase\Utility\Misc;
 
 class BistumsligaProfileSearch extends ProfileSearch
 {
