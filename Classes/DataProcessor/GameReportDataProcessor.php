@@ -73,7 +73,6 @@ class GameReportDataProcessor extends \In2code\Powermail\DataProcessor\AbstractD
         $finalGuest = $get('endstand_gast') ?? '';
         $halfHome = $get('halbzeitstand') ?? '';
         $halfGuest = $get('halbzeitstand_gast') ?? '';
-        $referee = $get('schiedsrichter') ?? '';
         $report = $get('bemerkungen') ?? '';
         $author = trim(($get('vorname') ?? '') . ' ' . ($get('nachname') ?? ''));
         $authorTeam = $get('mannschaft') ?? '';
@@ -127,29 +126,6 @@ class GameReportDataProcessor extends \In2code\Powermail\DataProcessor\AbstractD
         $game->setStatus(2);
 
         $this->gameRepository->update($game);
-
-        if ($referee === "Nicht anwesend") {
-            $refereeProfile = $game->getReferee();
-            $refereeLastName = $refereeProfile?->getLastName();
-            if ($refereeLastName) {
-                /**
-                 * @var Team $teamToPenalty
-                 */
-                $teamToPenalty = $this->teamRepository->findOneByName($refereeLastName);
-
-                if (!empty($teamToPenalty)) {
-                    $penalty = new CompetitionPenalty();
-                    $penalty->setTeam($teamToPenalty);
-                    $penalty->setCompetition($competitionObject);
-                    $penalty->setGame($game);
-                    $penalty->setPointsPos(1);
-                    $penalty->setComment("-1 Punkt, " . $authorTeam . " meldete: " . $teamToPenalty->getName() . " hat den Schiedsrichter nicht gestellt, " . $round);
-                    $penalty->setPid($competitionObject->getPid());
-
-                    $this->competitionPenaltyRepository->add($penalty);
-                }
-            }
-        }
 
         $this->persistenceManager->persistAll();
     }
