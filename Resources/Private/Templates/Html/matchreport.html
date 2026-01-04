@@ -1,4 +1,4 @@
-<html>
+<html lang="de">
 <head>
 <title>HTML-Template for match report</title>
 </head>
@@ -11,7 +11,7 @@
 
 <table style="width:100%">
 <tr>
-<td class="cfcleague-report-teamname">###MATCH_HOME_LOGO###</td><td class="cfcleague-report-result">###MATCH_GOALS_HOME### : ###MATCH_GOALS_GUEST###</td><td class="cfcleague-report-teamname">###MATCH_GUEST_LOGO###</td>
+<td class="cfcleague-report-teamname">###MATCH_HOME_LOGO###</td><td class="cfcleague-report-result">###MATCH_GOALS_HOME### : ###MATCH_GOALS_GUEST### (###MATCH_GOALS_HOME_1###&nbsp;:&nbsp;###MATCH_GOALS_GUEST_1###)</td><td class="cfcleague-report-teamname">###MATCH_GUEST_LOGO###</td>
 </tr>
 <tr>
 <td class="cfcleague-report-teamname">###MATCH_HOME_NAME###</td>
@@ -97,8 +97,9 @@
 <h2>Subpart for historic matches</h2>
 
 ###HISTORIC_MATCHES###
+<h2>Vergangene Spiele der beiden Teams</h2>
 ###MATCHS###
-<table cellspacing="0" cellpadding="0" class="cfcleague-matchtable">
+<table class="cfcleague-matchtable">
 
 ###MATCH###
 <tr class="cfcleague-matchtable-row###MATCH_ROLL### cfcleague-matchtable-rowinfo">
@@ -139,9 +140,10 @@
 <h2>Subpart for matches of current round</h2>
 
 ###CURRENTROUND_MATCHES###
+<h2>Andere Spiele vom aktuellen Spieltag</h2>
 ###MATCHS###
-<h2>###LABEL_CURRENTROUND###: ###MATCH_ROUND_NAME###</h2>
-<table cellspacing="0" cellpadding="0" class="cfcleague-matchtable">
+<h3>###LABEL_CURRENTROUND###: ###MATCH_ROUND_NAME###</h3>
+<table class="cfcleague-matchtable">
 ###MATCH###
 <tr class="cfcleague-matchtable-row###MATCH_ROLL### cfcleague-matchtable-rowinfo">
 <td colspan="10">###MATCH_DATE###</td>
