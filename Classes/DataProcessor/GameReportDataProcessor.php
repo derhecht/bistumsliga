@@ -120,6 +120,7 @@ class GameReportDataProcessor extends \In2code\Powermail\DataProcessor\AbstractD
         if (!empty($report)) {
             $game->setGameReport($report . PHP_EOL . " von " . $author . ", " . $authorTeam);
             $game->setGameReportAuthor($author);
+            $game->setLinkReport(1);
         }
 
         //set finished

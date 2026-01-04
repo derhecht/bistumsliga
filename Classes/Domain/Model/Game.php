@@ -96,6 +96,24 @@ final class Game extends AbstractEntity
         $this->addinfo = $addinfo;
     }
 
+    protected int $linkReport;
+
+    /**
+     * @return int|null
+     */
+    public function getLinkReport(): ?int
+    {
+        return $this->linkReport;
+    }
+
+    /**
+     * @param int $linkReport
+     */
+    public function setLinkReport(int $linkReport): void
+    {
+        $this->linkReport = $linkReport;
+    }
+
     /**
      * @var int
      */
