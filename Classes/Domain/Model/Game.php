@@ -17,6 +17,9 @@ final class Game extends AbstractEntity
     protected int $goalsHome1;
 
     protected int $goalsHome2;
+    protected int $isPenalty;
+    protected int $goalsHomeAp;
+    protected int $goalsGuestAp;
 
     public function getGoalsHome2(): int
     {
@@ -198,5 +201,44 @@ final class Game extends AbstractEntity
     public function setReferee(Profile $referee): void
     {
         $this->referee = $referee;
+    }
+
+    public function setIsPenalty(int $isPenalty): void
+    {
+        $this->isPenalty = $isPenalty;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIsPenalty(): int
+    {
+        return $this->isPenalty;
+    }
+
+    public function setGoalsHomeAp(int $goalsHomeAp): void
+    {
+        $this->goalsHomeAp = $goalsHomeAp;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGoalsHomeAp(): int
+    {
+        return $this->goalsHomeAp;
+    }
+
+    public function setGoalsGuestAp(int $goalsGuestAp): void
+    {
+        $this->goalsGuestAp = $goalsGuestAp;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGoalsGuestAp(): int
+    {
+        return $this->goalsGuestAp;
     }
 }

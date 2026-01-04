@@ -77,6 +77,9 @@ class GameReportDataProcessor extends \In2code\Powermail\DataProcessor\AbstractD
         $author = trim(($get('vorname') ?? '') . ' ' . ($get('nachname') ?? ''));
         $authorTeam = $get('mannschaft') ?? '';
         $assessment = $get('wertung') ?? '';
+        $penalty = $get('neunmeterschiessen') ?? '';
+        $penaltyHome = $get('standnachneunmeterschiessenheim') ?? '';
+        $penaltyGuest = $get('standnachneunmeterschiessengaeste') ?? '';
 
         /**
          * @var Competition $competitionObject
@@ -121,6 +124,12 @@ class GameReportDataProcessor extends \In2code\Powermail\DataProcessor\AbstractD
             $game->setGameReport($report . PHP_EOL . " von " . $author . ", " . $authorTeam);
             $game->setGameReportAuthor($author);
             $game->setLinkReport(1);
+        }
+
+        if(intval($penalty) > 0) {
+            $game->setIsPenalty(1);
+            $game->setGoalsHomeAp(intval($penaltyHome));
+            $game->setGoalsGuestAp(intval($penaltyGuest));
         }
 
         //set finished
