@@ -1,0 +1,120 @@
+<html>
+<head>
+    <title>Template für Spielplan</title>
+</head>
+<body>
+
+<h1>Template für Spielplan</h1>
+<h2>Einige vorhandene Marker als Beispiel:</h2>
+<pre>
+###MATCH### Subpart für ein Spiel
+###MATCH_ROLL### Marker für den Typ einer Zeile. Dies ist eine laufende Nummer bei 0 beginnend und leaguetable.table.rowroll endend.
+###MATCH_HOME_UID### Marker für UID des Heimteams
+###MATCH_HOME_NAME### Marker für Name des Heimteams
+###MATCH_HOME_SHORT_NAME### Marker für Kurzname des Heimteams
+###MATCH_HOME_SHOWTEAMLINK### Subpart für Link auf das Heimteam
+###MATCH_HOME_LOGO### Marker für das Logo des Heimteams
+###MATCHCOUNT### Marker für Anzahl der Spiele
+###MATCH_COMPETITION_NAME### Marker für Name des Wettbewerbs
+###MATCH_COMPETITION_LOGO### Marker für Logo des Wettbewerbs
+###MATCH_COMPETITION_GROUP_NAME### Marker für Name der Altersgruppe
+###MATCH_DATE### Marker für Datum des Spiels
+###MATCH_GOALS_HOME### Marker für Tore des Heimteams nach Spielende
+###MATCH_GOALS_GUEST### Marker für Tore des Gastteams nach Spielende
+###MATCH_DCRESULTSUFFIX### Marker Verlängerung und Elfmeterschiessen
+###MATCH_REPORTLINK### Marker für Link zum Spielbericht
+###MATCH_TICKERLINK### Marker für Link zum Liveticker
+###MATCH_GUEST_SHOWTEAMLINK### Link auf die Gastmannschaft
+
+</pre>
+<p>Weitere Marker ergeben sich aus den obigen Beispielen. Statt HOME verwendet man z.B. GUEST
+    für die Gastmannschaft.
+</p>
+
+<!-- ###MATCHTABLE### start -->
+###MATCHS###
+###FILTERITEMS###
+###PLAYER###
+Spielplan für ###PLAYER_DCNAME###
+###PLAYER###
+###COACH###
+Spielplan für den Trainer ###COACH_DCNAME###
+###COACH###
+###REFEREE###
+Spielplan für Schiedsrichter ###REFEREE_DCNAME###
+###REFEREE###
+###FILTERITEMS###
+
+<table class="table table-striped table-condensed">
+    ###MATCH###
+    <tr class="cfcleague-matchtable-row###MATCH_ROLL###">
+        <td colspan="10">###MATCH_DATE### (Schiedsrichter: ###MATCH_REFEREE_NAME###, Spielort: ###MATCH_STADIUM_NAME###)</td>
+    </tr>
+    <tr class="cfcleague-matchtable-row###MATCH_ROLL###">
+        <td>###MATCH_ROUND_NAME###</td>
+        <td>###MATCH_HOME_LOGO### ###MATCH_HOME_SHOWTEAMLINK######MATCH_HOME_NAME######MATCH_HOME_SHOWTEAMLINK###</td>
+        <td>-</td>
+        <td>###MATCH_GUEST_SHOWTEAMLINK######MATCH_GUEST_NAME######MATCH_GUEST_SHOWTEAMLINK### ###MATCH_GUEST_LOGO###</td>
+        <td class="cfcleague-matchtable-result">
+
+            <!-- ###RESULT_STATUS_0### Ergebnis vor dem Spiel -->
+            -&nbsp;:&nbsp;-
+            <!-- ###RESULT_STATUS_0### Ergebnis vor dem Spiel -->
+
+            <!-- ###RESULT_STATUS_-10### Ergebnis bei Spielverlegung -->
+            ###LABEL_MATCHSTATUS_POSTPONED###
+            <!-- ###RESULT_STATUS_-10### Ergebnis bei Spielverlegung -->
+
+            <!-- ###RESULT_STATUS_-1### Ergebnis bei ungültig -->
+            ###LABEL_MATCHSTATUS_INVALID###
+            <!-- ###RESULT_STATUS_-1### Ergebnis bei ungültig -->
+
+            <!-- ###RESULT_STATUS_1### Ergebnis während des Spiels -->
+            ###MATCH_GOALS_HOME###&nbsp;:&nbsp;###MATCH_GOALS_GUEST###
+            <!-- ###RESULT_STATUS_1### Ergebnis während des Spiels -->
+
+            <!-- ###RESULT_STATUS_2### Ergebnis nach Spielende -->
+            ###MATCH_REPORTLINK######MATCH_GOALS_HOME###&nbsp;:&nbsp;###MATCH_GOALS_GUEST### (###MATCH_GOALS_HOME_1###&nbsp;:&nbsp;###MATCH_GOALS_GUEST_1###) ###MATCH_DCRESULTSUFFIX######MATCH_REPORTLINK###
+            <!-- ###RESULT_STATUS_2### Ergebnis nach Spielende -->
+            <br />###MATCH_ADDINFO###
+            ###MATCH_SETRESULTS###
+            <h3>###LABEL_SETS###</h3>
+            <ul>
+                ###MATCH_SETRESULT###
+                <li>###MATCH_SETRESULT_SET###.###LABEL_SET###: ###MATCH_SETRESULT_POINTSHOME### : ###MATCH_SETRESULT_POINTSGUEST###</li>
+                ###MATCH_SETRESULT###
+            </ul>
+            ###MATCH_SETRESULTS###
+
+        </td>
+    </tr>
+
+
+    <!-- ###MATCH_FREE### Team hat spielfrei -->
+    <tr class="cfcleague-matchtable-row###MATCH_ROLL### cfcleague-matchtable-rowinfo">
+        <td colspan="10">###MATCH_DATE### Spielfrei (###MATCH_COMPETITION_NAME###)</td>
+    </tr>
+    <tr class="cfcleague-matchtable-row###MATCH_ROLL### cfcleague-matchtable-rowmatch">
+        <td>###MATCH_ROUND_NAME###</td>
+        <td>
+            ###MATCH_HOME_LOGO### ###MATCH_HOME_SHOWTEAMLINK######MATCH_HOME_NAME######MATCH_HOME_SHOWTEAMLINK###
+            ###MATCH_GUEST_SHOWTEAMLINK######MATCH_GUEST_NAME######MATCH_GUEST_SHOWTEAMLINK### ###MATCH_GUEST_LOGO###</td>
+        <td>-</td>
+        <td>spielfrei</td>
+        <td class="cfcleague-matchtable-result">&nbsp;
+        </td>
+    </tr>
+
+    <!-- ###MATCH_FREE### Team hat spielfrei -->
+
+    ###MATCH###
+</table>
+
+<!-- ### INCLUDE_TEMPLATE EXT:cfc_league_fe/Resources/Private/Templates/partials.html@DEFAULTPAGEBROWSER ### -->
+
+###MATCHCOUNT### Spiele gefunden.
+###MATCHS###
+
+<!-- ###MATCHTABLE### end -->
+</body>
+</html>
